@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+/* ===== DESIGN TOKENS: Aman x NOT A HOTEL ===== */
+:root {
+  /* --- Base Palette (warm, organic) --- */
+  --color-cream: #FAF8F4;
+  --color-cream-dark: #F5F1EA;
+  --color-parchment: #EDE8DF;
+  --color-sand: #D4CCC0;
+  --color-stone: #A09890;
+  --color-charcoal: #4A4540;
+  --color-ink: #2C2825;
+  --color-obsidian: #1A1815;
+
+  /* --- Accent Palette (muted, earth tones) --- */
+  --color-sage: #8B9E8B;
+  --color-sage-light: #E8EDE8;
+  --color-indigo: #7B8BA6;
+  --color-indigo-light: #E4E8EF;
+  --color-terracotta: #C4907A;
+  --color-terracotta-light: #F2E8E3;
+  --color-lavender: #9B8EB0;
+  --color-lavender-light: #EDE8F2;
+  --color-moss: #7A9488;
+  --color-moss-light: #E3ECE8;
+  --color-amber: #C4A265;
+  --color-amber-light: #F2ECE0;
+
+  /* --- Spacing (generous, Aman breathing room) --- */
+  --space-section: 160px;
+  --space-block: 80px;
+  --space-element: 40px;
+  --space-tight: 20px;
+  --space-micro: 8px;
+
+  /* --- Typography --- */
+  --font-serif: "Noto Serif JP", "Georgia", serif;
+  --font-sans: "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+
+  /* --- Animation --- */
+  --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  --duration-slow: 600ms;
+  --duration-medium: 400ms;
+  --duration-fast: 200ms;
+
+  /* --- Layout --- */
+  --max-content: 1200px;
+  --max-prose: 720px;
+  --max-wide: 1440px;
+  --header-height: 72px;
+
+  /* --- Shadows (warm-tinted, barely there) --- */
+  --shadow-subtle: 0 1px 3px rgba(42, 40, 37, 0.04);
+  --shadow-card: 0 4px 20px rgba(42, 40, 37, 0.06);
+  --shadow-elevated: 0 8px 40px rgba(42, 40, 37, 0.08);
+}
+
+/* --- Tailwind CSS 4 theme integration --- */
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-cream-dark: var(--color-cream-dark);
+  --color-parchment: var(--color-parchment);
+  --color-sand: var(--color-sand);
+  --color-stone: var(--color-stone);
+  --color-charcoal: var(--color-charcoal);
+  --color-ink: var(--color-ink);
+  --color-obsidian: var(--color-obsidian);
+  --color-sage: var(--color-sage);
+  --color-sage-light: var(--color-sage-light);
+  --color-indigo: var(--color-indigo);
+  --color-indigo-light: var(--color-indigo-light);
+  --color-terracotta: var(--color-terracotta);
+  --color-terracotta-light: var(--color-terracotta-light);
+  --color-lavender: var(--color-lavender);
+  --color-lavender-light: var(--color-lavender-light);
+  --color-moss: var(--color-moss);
+  --color-moss-light: var(--color-moss-light);
+  --color-amber: var(--color-amber);
+  --color-amber-light: var(--color-amber-light);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+/* ===== BASE TYPOGRAPHY ===== */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  background: var(--color-cream);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.35;
+}
+
+h3 {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+.text-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.jp-text {
+  font-feature-settings: "palt", "halt";
+  text-align: justify;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--color-sand);
+  margin: var(--space-element) 0;
+}
+
+.full-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-luxury),
+              transform var(--duration-slow) var(--ease-luxury);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-medium) var(--ease-luxury),
+              transform var(--duration-medium) var(--ease-luxury);
+}
+
+.reveal-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+.reveal-children.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: none; }
+.reveal-children.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: none; }
+.reveal-children.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: none; }
+.reveal-children.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: none; }
+.reveal-children.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: none; }
+
+/* ===== GLOBAL REFINEMENTS ===== */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-sand) transparent;
+}
+
+::selection {
+  background: var(--color-terracotta-light);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sage);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+/* Prose links */
+.prose a,
+.prose-aman a {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-sand);
+  transition: text-decoration-color var(--duration-fast);
+}
+
+.prose a:hover,
+.prose-aman a:hover {
+  text-decoration-color: var(--color-terracotta);
+}
+
+/* ===== ARTICLE PROSE STYLING ===== */
+.prose-aman {
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--color-charcoal);
+}
+
+.prose-aman h2 {
+  margin-top: 64px;
+  margin-bottom: 24px;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.prose-aman h3 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.prose-aman p {
+  margin-bottom: 32px;
+  leading: 2;
+}
+
+.prose-aman strong {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.prose-aman ul {
+  margin: 32px 0;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.prose-aman ul li {
+  margin-bottom: 8px;
+  line-height: 1.9;
+}
+
+.prose-aman blockquote {
+  margin: 40px 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--color-sand);
+  color: var(--color-stone);
+  font-style: italic;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :root {
+    --space-section: 80px;
+    --space-block: 48px;
+    --space-element: 24px;
+    --header-height: 60px;
+  }
+
+  h1 { letter-spacing: 0.02em; }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --space-section: 200px;
+    --space-block: 100px;
+  }
+}

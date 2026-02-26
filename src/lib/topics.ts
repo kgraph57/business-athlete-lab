@@ -8,7 +8,6 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-sage",
     bgColor: "bg-sage-light",
     borderColor: "border-sage/20",
-    icon: "",
     description:
       "科学が示す最適な運動戦略。筋トレ、有酸素運動、リカバリーの最前線。",
   },
@@ -19,9 +18,7 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-indigo",
     bgColor: "bg-indigo-light",
     borderColor: "border-indigo/20",
-    icon: "",
-    description:
-      "パフォーマンスを最大化する眠りの科学。概日リズムと睡眠衛生。",
+    description: "パフォーマンスを最大化する眠りの科学。概日リズムと睡眠衛生。",
   },
   nutrition: {
     id: "nutrition",
@@ -30,9 +27,7 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-terracotta",
     bgColor: "bg-terracotta-light",
     borderColor: "border-terracotta/20",
-    icon: "",
-    description:
-      "エビデンスに基づく食事戦略。腸内環境からサプリメントまで。",
+    description: "エビデンスに基づく食事戦略。腸内環境からサプリメントまで。",
   },
   mental: {
     id: "mental",
@@ -41,9 +36,7 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-lavender",
     bgColor: "bg-lavender-light",
     borderColor: "border-lavender/20",
-    icon: "",
-    description:
-      "ストレス管理と認知機能の最適化。マインドフルネスの実践。",
+    description: "ストレス管理と認知機能の最適化。マインドフルネスの実践。",
   },
   lifestyle: {
     id: "lifestyle",
@@ -52,9 +45,7 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-moss",
     bgColor: "bg-moss-light",
     borderColor: "border-moss/20",
-    icon: "",
-    description:
-      "習慣化の科学、時間管理、予防医療。日常を整える知恵。",
+    description: "習慣化の科学、時間管理、予防医療。日常を整える知恵。",
   },
   aging: {
     id: "aging",
@@ -63,9 +54,16 @@ export const TOPICS: Record<string, TopicConfig> = {
     color: "text-amber",
     bgColor: "bg-amber-light",
     borderColor: "border-amber/20",
-    icon: "",
-    description:
-      "健康寿命を延ばす最新研究。老化のメカニズムと介入戦略。",
+    description: "健康寿命を延ばす最新研究。老化のメカニズムと介入戦略。",
+  },
+  integrative: {
+    id: "integrative",
+    label: "総合",
+    labelEn: "Integrative",
+    color: "text-stone",
+    bgColor: "bg-parchment",
+    borderColor: "border-stone/20",
+    description: "分野横断的な健康科学。複数の領域にまたがるエビデンスを統合。",
   },
 };
 
@@ -84,6 +82,7 @@ const TOPIC_ACCENT: Record<string, string> = {
   mental: "var(--color-lavender)",
   lifestyle: "var(--color-moss)",
   aging: "var(--color-amber)",
+  integrative: "var(--color-stone)",
 };
 
 export function getTopicAccent(topicId: string): string {

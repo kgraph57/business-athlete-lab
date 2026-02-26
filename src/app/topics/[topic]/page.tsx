@@ -1,5 +1,5 @@
 import { getArticlesByTopic } from "@/lib/articles";
-import { TOPICS, getAllTopics, getTopicAccent } from "@/lib/topics";
+import { TOPICS, getAllTopics } from "@/lib/topics";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Hero } from "@/components/Hero";
 import { RevealSection } from "@/components/ui/RevealSection";

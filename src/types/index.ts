@@ -19,7 +19,6 @@ export type Topic =
   | "nutrition"
   | "mental"
   | "lifestyle"
-  | "chronic"
   | "aging"
   | "integrative";
 
@@ -30,6 +29,5 @@ export interface TopicConfig {
   color: string;
   bgColor: string;
   borderColor: string;
-  icon: string;
   description: string;
 }

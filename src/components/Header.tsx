@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
@@ -20,12 +20,23 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen, closeMenu]);
 
   return (
     <>
@@ -76,15 +87,21 @@ export function Header() {
       </header>
 
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-cream">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="ナビゲーションメニュー"
+          className="fixed inset-0 z-[100] flex flex-col bg-cream"
+        >
           <div className="flex items-center justify-between px-6 py-6">
             <span className="font-serif text-lg font-semibold text-ink">
               Business Athlete Lab
             </span>
             <button
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
               className="text-label text-stone"
               aria-label="メニューを閉じる"
+              autoFocus
             >
               Close
             </button>
@@ -94,7 +111,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="font-serif text-2xl text-ink transition-colors hover:text-stone"
               >
                 {item.label}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Serif_JP, Inter, Noto_Sans_JP } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const notoSerifJp = Noto_Serif_JP({
@@ -60,6 +61,7 @@ export default function RootLayout({
       className={`${notoSerifJp.variable} ${inter.variable} ${notoSansJp.variable}`}
     >
       <body className="bg-cream text-charcoal antialiased">
+        <GoogleAnalytics />
         <Header />
         <main className="min-h-screen pt-[var(--header-height)]">
           {children}

@@ -1,8 +1,10 @@
 import { getAllArticles, getArticleContent } from "@/lib/articles";
 import { TOPICS, getTopicAccent } from "@/lib/topics";
+import { SITE } from "@/lib/config";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import { RevealSection } from "@/components/ui/RevealSection";
 import type { Metadata } from "next";
 
@@ -20,9 +22,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const articles = getAllArticles();
   const meta = articles.find((a) => a.slug === slug);
   if (!meta) return {};
+
+  const topic = TOPICS[meta.topic];
+  const description = `${meta.title} — ${topic?.label ?? ""} | Business Athlete Lab`;
+
   return {
     title: meta.title,
-    description: `${meta.title} — Business Athlete Lab`,
+    description,
+    keywords: meta.keywords,
+    openGraph: {
+      title: meta.title,
+      description,
+      type: "article",
+      publishedTime: meta.publishedAt ?? undefined,
+      authors: [SITE.author],
+      tags: meta.keywords,
+      url: `${SITE.url}/articles/${slug}/`,
+    },
+    twitter: {
+      card: "summary",
+      title: meta.title,
+      description,
+    },
   };
 }
 
@@ -41,8 +62,35 @@ export default async function ArticlePage({ params }: Props) {
     .filter((a) => a.topic === meta.topic && a.slug !== meta.slug)
     .slice(0, 3);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: meta.title,
+    datePublished: meta.publishedAt ?? undefined,
+    author: {
+      "@type": "Person",
+      name: SITE.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE.title,
+      url: SITE.url,
+    },
+    mainEntityOfPage: `${SITE.url}/articles/${slug}/`,
+    keywords: meta.keywords.join(", "),
+    articleSection: topic?.label,
+    wordCount: meta.wordCount,
+    inLanguage: "ja",
+  };
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ReadingProgress />
+
       {/* Article Header */}
       <section className="bg-gradient-to-br from-cream-dark via-parchment to-sand/30 pb-16 pt-12">
         <div className="mx-auto max-w-[var(--max-prose)] px-6 md:px-0">

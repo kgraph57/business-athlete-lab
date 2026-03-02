@@ -3,6 +3,7 @@ import { Noto_Serif_JP, Inter, Noto_Sans_JP } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { SITE } from "@/lib/config";
 import "./globals.css";
 
 const notoSerifJp = Noto_Serif_JP({
@@ -35,6 +36,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
   openGraph: {
     title: "Business Athlete Lab",
     description: "働く身体をアップデート。ランチタイムで読む健康戦略。",
@@ -61,6 +67,23 @@ export default function RootLayout({
       className={`${notoSerifJp.variable} ${inter.variable} ${notoSansJp.variable}`}
     >
       <body className="bg-cream text-charcoal antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE.title,
+              url: SITE.url,
+              description: SITE.description,
+              inLanguage: "ja",
+              publisher: {
+                "@type": "Person",
+                name: SITE.author,
+              },
+            }),
+          }}
+        />
         <GoogleAnalytics />
         <Header />
         <main className="min-h-screen pt-[var(--header-height)]">

@@ -4,7 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/ArticleCard";
 import { RevealSection } from "@/components/ui/RevealSection";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { TableOfContents } from "@/components/TableOfContents";
+import { ShareButtons } from "@/components/ShareButtons";
+import { ArticleJsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
+
+const SITE_URL = "https://kgraph57.github.io/business-athlete-lab";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,9 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const articles = getAllArticles();
   const meta = articles.find((a) => a.slug === slug);
   if (!meta) return {};
+  const url = `${SITE_URL}/articles/${slug}/`;
   return {
     title: meta.title,
     description: `${meta.title} — Business Athlete Lab`,
+    alternates: { canonical: url },
+    openGraph: {
+      title: meta.title,
+      description: `${meta.title} — Business Athlete Lab`,
+      type: "article",
+      url,
+      publishedTime: meta.publishedAt,
+      section: meta.topic,
+      tags: meta.keywords,
+    },
+    twitter: {
+      card: "summary",
+      title: meta.title,
+    },
   };
 }
 
@@ -37,12 +58,15 @@ export default async function ArticlePage({ params }: Props) {
   const topic = TOPICS[meta.topic];
   const accent = getTopicAccent(meta.topic);
 
-  const related = articles
+  const allArticles = getAllArticles();
+  const related = allArticles
     .filter((a) => a.topic === meta.topic && a.slug !== meta.slug)
     .slice(0, 3);
 
   return (
     <article>
+      <ReadingProgress />
+      <ArticleJsonLd article={meta} />
       {/* Article Header */}
       <section className="bg-gradient-to-br from-cream-dark via-parchment to-sand/30 pb-16 pt-12">
         <div className="mx-auto max-w-[var(--max-prose)] px-6 md:px-0">
@@ -89,16 +113,26 @@ export default async function ArticlePage({ params }: Props) {
               ))}
             </div>
           )}
+
+          <div className="mt-8">
+            <ShareButtons title={meta.title} slug={meta.slug} />
+          </div>
         </div>
       </section>
 
-      {/* Article Body */}
+      {/* Article Body with ToC sidebar */}
       {content && (
-        <div className="mx-auto max-w-[var(--max-prose)] px-6 py-[var(--space-block)] md:px-0">
-          <div
-            className="prose-aman"
-            dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
-          />
+        <div className="mx-auto max-w-[var(--max-wide)] px-6 py-[var(--space-block)] xl:flex xl:gap-12 xl:px-12">
+          <aside className="hidden xl:block xl:w-56 xl:shrink-0">
+            <TableOfContents />
+          </aside>
+          <div className="mx-auto max-w-[var(--max-prose)]">
+            <div
+              className="prose-aman"
+              dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
+            />
+          </div>
+          <div className="hidden xl:block xl:w-56 xl:shrink-0" />
         </div>
       )}
 
@@ -123,7 +157,10 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Related Articles */}
       {related.length > 0 && (
-        <RevealSection as="section" className="bg-cream-dark py-[var(--space-section)]">
+        <RevealSection
+          as="section"
+          className="bg-cream-dark py-[var(--space-section)]"
+        >
           <div className="mx-auto max-w-[var(--max-content)] px-6 md:px-12">
             <h2 className="text-label mb-12">Related Articles</h2>
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -155,16 +192,28 @@ function renderMarkdown(md: string): string {
     }
 
     if (trimmed.startsWith("### ")) {
-      if (inList) { html.push("</ul>"); inList = false; }
+      if (inList) {
+        html.push("</ul>");
+        inList = false;
+      }
       html.push(`<h3>${escapeHtml(trimmed.slice(4))}</h3>`);
     } else if (trimmed.startsWith("## ")) {
-      if (inList) { html.push("</ul>"); inList = false; }
+      if (inList) {
+        html.push("</ul>");
+        inList = false;
+      }
       html.push(`<h2>${escapeHtml(trimmed.slice(3))}</h2>`);
     } else if (trimmed.startsWith("- ")) {
-      if (!inList) { html.push("<ul>"); inList = true; }
+      if (!inList) {
+        html.push("<ul>");
+        inList = true;
+      }
       html.push(`<li>${inlineFormat(trimmed.slice(2))}</li>`);
     } else {
-      if (inList) { html.push("</ul>"); inList = false; }
+      if (inList) {
+        html.push("</ul>");
+        inList = false;
+      }
       html.push(`<p>${inlineFormat(trimmed)}</p>`);
     }
   }
@@ -181,8 +230,5 @@ function escapeHtml(text: string): string {
 }
 
 function inlineFormat(text: string): string {
-  return escapeHtml(text).replace(
-    /\*\*(.+?)\*\*/g,
-    "<strong>$1</strong>"
-  );
+  return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }

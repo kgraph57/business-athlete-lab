@@ -1,14 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getAllArticles } from "@/lib/articles";
-import { getAllTopics } from "@/lib/topics";
+import { getCuratedArticles } from "@/lib/articles";
 
 export const dynamic = "force-static";
 
 const BASE_URL = "https://kgraph57.github.io/business-athlete-lab";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const articles = getAllArticles();
-  const topics = getAllTopics();
+  const curated = getCuratedArticles();
 
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -21,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/articles`,
@@ -30,21 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/topics`,
+      url: `${BASE_URL}/services`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.6,
+      priority: 0.7,
     },
   ];
 
-  const topicPages: MetadataRoute.Sitemap = topics.map((topic) => ({
-    url: `${BASE_URL}/topics/${topic.id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
+  const articlePages: MetadataRoute.Sitemap = curated.map((article) => ({
     url: `${BASE_URL}/articles/${article.slug}`,
     lastModified: article.publishedAt
       ? new Date(article.publishedAt)
@@ -53,5 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...topicPages, ...articlePages];
+  return [...staticPages, ...articlePages];
 }

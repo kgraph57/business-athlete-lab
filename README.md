@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Business Athlete Lab
 
-## Getting Started
+医師・岡本賢によるエビデンスベースの予防医療メディアサイト。
 
-First, run the development server:
+運動・睡眠・栄養・メンタル・生活習慣・長寿など、ビジネスパーソンの身体マネジメントに関する記事を、一次文献に基づいて発信しています。
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 16 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS v4
+- **コンテンツ**: Markdown（記事）
+- **ビルド**: 静的エクスポート（`output: "export"`）
+- **デプロイ**: GitHub Pages（`/business-athlete-lab` ベースパス）
+
+## 開発
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバー起動（http://localhost:3000）
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# ビルド（記事インデックスは prebuild で自動生成）
+npm run build
+
+# 本番ビルドのプレビュー
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## プロジェクト構造
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/              # Next.js App Router
+│   ├── page.tsx      # ホーム
+│   ├── articles/     # 記事一覧・詳細
+│   ├── topics/       # トピック別記事
+│   ├── about/        # プロフィール
+│   └── services/     # セミナー・講座・執筆依頼
+├── components/       # React コンポーネント
+├── lib/              # 記事管理、トピック設定、サイト設定
+└── types/            # TypeScript 型定義
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+content/
+├── articles/         # Markdown 記事
+├── index.json        # ビルド時に生成される記事インデックス
+└── curated.json      # 厳選記事のスラッグリスト
 
-## Learn More
+scripts/
+└── build-index.mjs   # 記事インデックス生成スクリプト
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 記事の追加・更新
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **新規記事**: `content/articles/` に Markdown ファイルを追加
+2. **厳選記事**: `content/curated.json` にスラッグを追加
+3. **ビルド**: `npm run build` でインデックスが自動更新される
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+記事の frontmatter 形式は `src/types/index.ts` を参照。
 
-## Deploy on Vercel
+## 設定
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+サイト全体の設定は `src/lib/config.ts` で管理：
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- タイトル・説明文
+- SNS リンク（Substack, note, X）
+- お問い合わせメールアドレス（Services ページ用）
+
+## デプロイ
+
+`main` ブランチへの push で GitHub Actions が自動ビルド・デプロイします。
+
+公開 URL: https://kgraph57.github.io/business-athlete-lab

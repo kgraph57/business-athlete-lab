@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/topics/", label: "Topics" },
-  { href: "/articles/", label: "Library" },
   { href: "/about/", label: "About" },
+  { href: "/articles/", label: "Articles" },
+  { href: "/services/", label: "Services" },
 ] as const;
+
+const NEWSLETTER_URL = "https://businessathletelab.substack.com";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,6 +73,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <ThemeToggle />
+            <a
+              href={NEWSLETTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-sm border border-ink/10 px-4 py-1.5 text-label text-ink transition-all hover:bg-ink hover:text-cream"
+            >
+              Newsletter
+            </a>
           </nav>
 
           <button
@@ -117,6 +129,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <ThemeToggle />
+            <a
+              href={NEWSLETTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-sm border border-ink/10 px-6 py-2 text-label text-ink transition-all hover:bg-ink hover:text-cream"
+            >
+              Newsletter
+            </a>
           </nav>
         </div>
       )}

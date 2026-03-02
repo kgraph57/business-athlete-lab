@@ -178,6 +178,41 @@ h3 {
 .reveal-children.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: none; }
 .reveal-children.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: none; }
 
+/* ===== DARK MODE ===== */
+html.dark {
+  --color-cream: #1A1815;
+  --color-cream-dark: #1E1B17;
+  --color-parchment: #252220;
+  --color-sand: #3A3632;
+  --color-stone: #8A8480;
+  --color-charcoal: #C4BEB8;
+  --color-ink: #F0EDE8;
+  --color-obsidian: #FAF8F4;
+  /* Accents: slightly brighter for dark backgrounds */
+  --color-sage: #A0B8A0;
+  --color-indigo: #95A5C0;
+  --color-terracotta: #D4A090;
+  --color-lavender: #B5A8CA;
+  --color-moss: #94AEA2;
+  --color-amber: #D4B275;
+  /* Light variants become darker */
+  --color-sage-light: #1E2A1E;
+  --color-indigo-light: #1E222A;
+  --color-terracotta-light: #2A2220;
+  --color-lavender-light: #262028;
+  --color-moss-light: #1E2822;
+  --color-amber-light: #2A2620;
+  /* Shadows: lighter opacity for dark */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.16);
+  --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+html.dark ::selection {
+  background: var(--color-terracotta-light);
+  color: var(--color-ink);
+}
+
 /* ===== GLOBAL REFINEMENTS ===== */
 html {
   scroll-behavior: smooth;
@@ -288,4 +323,59 @@ a {
     --space-section: 200px;
     --space-block: 100px;
   }
+}
+
+/* ===== QUIZ SLIDER (Lasta-style) ===== */
+.quiz-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--slider-accent) 0%,
+    var(--slider-accent) var(--slider-percentage),
+    var(--color-sand) var(--slider-percentage),
+    var(--color-sand) 100%
+  );
+  outline: none;
+  transition: background 0.15s;
+}
+
+.quiz-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  border: 3px solid var(--slider-accent);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quiz-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-elevated);
+}
+
+.quiz-slider::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+.quiz-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  border: 3px solid var(--slider-accent);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+
+.quiz-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-sand);
 }

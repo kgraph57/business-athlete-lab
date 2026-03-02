@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Serif_JP, Inter, Noto_Sans_JP } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
@@ -30,14 +31,16 @@ export const metadata: Metadata = {
     default: "Business Athlete Lab",
     template: "%s | Business Athlete Lab",
   },
-  description: "働く身体をアップデート。ランチタイムで読む健康戦略。",
+  description:
+    "医師・岡本賢が自らの身体で実践する、エビデンスベースの予防医療メディア。",
   metadataBase: new URL("https://kgraph57.github.io/business-athlete-lab"),
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
     title: "Business Athlete Lab",
-    description: "働く身体をアップデート。ランチタイムで読む健康戦略。",
+    description:
+      "医師・岡本賢が自らの身体で実践する、エビデンスベースの予防医療メディア。",
     type: "website",
     locale: "ja_JP",
     siteName: "Business Athlete Lab",
@@ -46,7 +49,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Business Athlete Lab",
-    description: "働く身体をアップデート。ランチタイムで読む健康戦略。",
+    description:
+      "医師・岡本賢が自らの身体で実践する、エビデンスベースの予防医療メディア。",
   },
 };
 
@@ -59,7 +63,15 @@ export default function RootLayout({
     <html
       lang="ja"
       className={`${notoSerifJp.variable} ${inter.variable} ${notoSansJp.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("bal-theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="bg-cream text-charcoal antialiased">
         <GoogleAnalytics />
         <Header />
@@ -67,6 +79,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

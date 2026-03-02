@@ -59,3 +59,32 @@ export function getArticleContent(slug: string): string | null {
 export function getTopicStats(): Record<string, number> {
   return loadIndex().stats;
 }
+
+const CURATED_PATH = path.join(process.cwd(), "content", "curated.json");
+
+let _curatedCache: string[] | null = null;
+
+function loadCuratedSlugs(): string[] {
+  if (_curatedCache) return _curatedCache;
+
+  if (!fs.existsSync(CURATED_PATH)) {
+    return [];
+  }
+
+  const raw = fs.readFileSync(CURATED_PATH, "utf-8");
+  const data = JSON.parse(raw) as { slugs: string[] };
+  _curatedCache = data.slugs;
+  return _curatedCache;
+}
+
+export function getCuratedArticles(): ArticleMeta[] {
+  const slugs = loadCuratedSlugs();
+  const all = getAllArticles();
+  const slugSet = new Set(slugs);
+  return all.filter((a) => slugSet.has(a.slug));
+}
+
+export function isCurated(slug: string): boolean {
+  const slugs = loadCuratedSlugs();
+  return slugs.includes(slug);
+}

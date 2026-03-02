@@ -45,12 +45,21 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     siteName: "Business Athlete Lab",
     url: "https://kgraph57.github.io/business-athlete-lab",
+    images: [
+      {
+        url: "/business-athlete-lab/images/og-main.webp",
+        width: 1200,
+        height: 630,
+        alt: "Business Athlete Lab",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Business Athlete Lab",
     description:
       "医師・岡本賢が自らの身体で実践する、エビデンスベースの予防医療メディア。",
+    images: ["/business-athlete-lab/images/og-main.webp"],
   },
 };
 

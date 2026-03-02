@@ -39,10 +39,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: meta.publishedAt,
       section: meta.topic,
       tags: meta.keywords,
+      images: [
+        {
+          url: "/business-athlete-lab/images/og-article.webp",
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: meta.title,
+      images: ["/business-athlete-lab/images/og-article.webp"],
     },
   };
 }

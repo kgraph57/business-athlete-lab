@@ -1,15 +1,25 @@
 import Link from "next/link";
 import { ArticleMeta } from "@/types";
 import { TOPICS, getTopicAccent } from "@/lib/topics";
+import { BASE_PATH } from "@/lib/config";
 
 interface Props {
   readonly article: ArticleMeta;
   readonly variant?: "standard" | "featured" | "compact";
+  /** トピック内での表示順（0始まり）。サムネイルのローテーションに使用。 */
+  readonly indexInTopic?: number;
 }
 
-export function ArticleCard({ article, variant = "standard" }: Props) {
+/** トピックとインデックスからサムネイル画像パスを返す（3枚ローテーション） */
+function getThumbnailSrc(topic: string, index: number): string {
+  const n = (index % 3) + 1;
+  return `${BASE_PATH}/images/thumb-${topic}-0${n}.webp`;
+}
+
+export function ArticleCard({ article, variant = "standard", indexInTopic = 0 }: Props) {
   const topic = TOPICS[article.topic];
   const accent = getTopicAccent(article.topic);
+  const thumbSrc = getThumbnailSrc(article.topic, indexInTopic);
 
   if (variant === "featured") {
     return (
@@ -18,7 +28,15 @@ export function ArticleCard({ article, variant = "standard" }: Props) {
           <div
             className="aspect-[4/3] overflow-hidden rounded-sm"
             style={{ background: `${accent}20` }}
-          />
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={thumbSrc}
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
           <div className="flex flex-col justify-center">
             {topic && (
               <span className="text-label mb-4" style={{ color: accent }}>
@@ -68,7 +86,15 @@ export function ArticleCard({ article, variant = "standard" }: Props) {
       <div
         className="mb-5 aspect-[3/2] overflow-hidden rounded-sm"
         style={{ background: `${accent}15` }}
-      />
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={thumbSrc}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
       {topic && (
         <span className="text-label mb-3 block" style={{ color: accent }}>
           {topic.labelEn}

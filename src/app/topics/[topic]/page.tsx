@@ -5,6 +5,7 @@ import { TopicArticleList } from "@/components/TopicArticleList";
 import { Topic } from "@/types";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { BASE_PATH } from "@/lib/config";
 
 interface Props {
   params: Promise<{ topic: string }>;
@@ -38,6 +39,7 @@ export default async function TopicPage({ params }: Props) {
         title={topicConfig.label}
         subtitle={topicConfig.description}
         variant="half"
+        imageSrc={`${BASE_PATH}/images/topic-${topicId}.webp`}
       />
 
       <section className="mx-auto max-w-[var(--max-content)] px-6 py-[var(--space-section)] md:px-12">

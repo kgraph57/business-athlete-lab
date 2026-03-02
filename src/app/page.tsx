@@ -7,6 +7,7 @@ import { RevealSection } from "@/components/ui/RevealSection";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { TopicShowcase } from "@/components/TopicShowcase";
 import { WebSiteJsonLd } from "@/components/JsonLd";
+import { BASE_PATH } from "@/lib/config";
 
 export default function HomePage() {
   const curated = getCuratedArticles();
@@ -21,6 +22,7 @@ export default function HomePage() {
         title="予防医療を、自分の身体で証明する。"
         subtitle="医師・岡本賢が、最新の医学論文とアスリートとしての実践を掛け合わせて届ける、エビデンスベースの健康戦略。"
         variant="full"
+        imageSrc={`${BASE_PATH}/images/hero-main.webp`}
       />
 
       {/* About Overview */}

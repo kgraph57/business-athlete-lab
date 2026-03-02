@@ -1,7 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { RevealSection } from "@/components/ui/RevealSection";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
-import { SITE } from "@/lib/config";
+import { SITE, BASE_PATH } from "@/lib/config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,6 +20,16 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[var(--max-prose)] px-6 py-[var(--space-section)] md:px-0">
         <RevealSection>
+          {/* about-01: プロフィール画像（縦位置） */}
+          <div className="mb-12 overflow-hidden rounded-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${BASE_PATH}/images/about-01.webp`}
+              alt="岡本賢 — ビジネスアスリートの朝"
+              className="w-full object-cover"
+              style={{ maxHeight: "480px", objectPosition: "center top" }}
+            />
+          </div>
           <h2 className="font-serif text-2xl font-medium text-ink">
             予防医療を、自分の身体で証明する。
           </h2>
@@ -45,6 +55,19 @@ export default function AboutPage() {
           </div>
         </RevealSection>
 
+        {/* about-02: トレーニング中（横長） */}
+        <RevealSection className="mt-[var(--space-section)]">
+          <div className="overflow-hidden rounded-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${BASE_PATH}/images/about-02.webp`}
+              alt="トレーニング中"
+              className="w-full object-cover"
+              style={{ maxHeight: "360px" }}
+            />
+          </div>
+        </RevealSection>
+
         <RevealSection className="mt-[var(--space-section)]">
           <span className="text-label mb-6 block">Profile</span>
           <h3 className="font-serif text-xl font-medium text-ink">
@@ -58,6 +81,19 @@ export default function AboutPage() {
               自らの身体でエビデンスを検証し、
               その知見をビジネスパーソン向けに発信。
             </p>
+          </div>
+        </RevealSection>
+
+        {/* about-03: 研究・知性（横長） */}
+        <RevealSection className="mt-[var(--space-block)]">
+          <div className="overflow-hidden rounded-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${BASE_PATH}/images/about-03.webp`}
+              alt="研究・論文を読む"
+              className="w-full object-cover"
+              style={{ maxHeight: "360px" }}
+            />
           </div>
         </RevealSection>
 

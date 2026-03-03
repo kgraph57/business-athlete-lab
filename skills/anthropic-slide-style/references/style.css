@@ -1,0 +1,104 @@
+/* Anthropic Slide Style CSS */
+
+:root {
+    --cream-background: #FDFDFB;
+    --terracotta-main: #C87E6F;
+    --brown-dark: #A56A57;
+    --beige-light: #F2E4D5;
+    --text-color: #333333;
+    --heading-font: 'Playfair Display', serif;
+    --body-font: 'Inter', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@900&display=swap');
+
+.slide {
+    background-color: var(--cream-background);
+    color: var(--text-color);
+    font-family: var(--body-font);
+    padding: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide::after {
+    content: "ANTHROPIC";
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #A0A0A0;
+}
+
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    font-weight: 900;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+p, ul, li {
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 800px;
+    text-align: left;
+}
+
+ul {
+    list-style-position: inside;
+    padding-left: 20px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.card {
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+}
+
+.card.terracotta {
+    background-color: var(--terracotta-main);
+    color: white;
+}
+
+.card.brown {
+    background-color: var(--brown-dark);
+    color: white;
+}
+
+.card.beige {
+    background-color: var(--beige-light);
+    color: var(--text-color);
+}
+
+.card h3 {
+    font-family: var(--heading-font);
+    font-weight: 900;
+    font-size: 24px;
+    color: inherit; /* Inherits color from parent .card */
+    margin-bottom: 15px;
+}
+
+.card ul {
+    font-size: 16px;
+    color: inherit;
+}

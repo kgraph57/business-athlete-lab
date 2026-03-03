@@ -1,17 +1,13 @@
-/* Anthropic Slide Style CSS (Updated Palette) */
+/* Anthropic Slide Style CSS (Business Diagrams Update) */
 
 :root {
     --swatch--ivory-light: #faf9f5; /* Main Background */
-    --swatch--ivory-medium: #f0eee6; /* Section Background */
-    --swatch--ivory-dark: #e8e6dc; /* Darker Section Background */
     --swatch--slate-dark: #141413; /* Main Text / Headings */
     --swatch--slate-medium: #3d3d3a; /* Body Text */
     --swatch--cloud-dark: #87867f; /* Muted Text */
     --swatch--clay: #d97757; /* Primary Accent (Terracotta) */
-    --swatch--accent: #c6613f; /* Secondary Accent (Darker Terracotta) */
-    --swatch--oat: #e3dacc; /* Card Background */
-    --swatch--kraft: #d4a27f; /* Card Background */
-    --swatch--manilla: #ebdbbc; /* Card Background */
+    --swatch--kraft: #d4a27f; /* Warm Tan/Kraft */
+    --swatch--oat: #e3dacc; /* Warm Beige */
 
     --heading-font: 'Playfair Display', serif;
     --body-font: 'Inter', sans-serif;
@@ -19,16 +15,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@900&display=swap');
 
+/* --- Base Slide Styles --- */
 .slide {
     background-color: var(--swatch--ivory-light);
     color: var(--swatch--slate-medium);
     font-family: var(--body-font);
-    padding: 50px;
-    position: relative;
+    padding: 60px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    width: 100%;
+    min-height: 720px;
+    position: relative;
 }
 
 .slide::after {
@@ -41,71 +39,85 @@
     color: var(--swatch--cloud-dark);
 }
 
-h1, h2, h3 {
+h1, h2 {
     font-family: var(--heading-font);
     font-weight: 900;
     color: var(--swatch--slate-dark);
     text-align: center;
-    margin-bottom: 30px;
 }
 
-h1 {
-    font-size: 48px;
-}
+h1 { font-size: 48px; margin-bottom: 15px; }
+ h2 { font-size: 24px; font-family: var(--body-font); font-weight: 400; color: var(--swatch--slate-medium); margin-bottom: 60px; }
 
-h2 {
-    font-size: 36px;
-}
-
-p, ul, li {
-    font-size: 20px;
-    line-height: 1.6;
-    max-width: 800px;
-    text-align: left;
-}
-
-ul {
-    list-style-position: inside;
-    padding-left: 20px;
-}
-
+/* --- Card Layout --- */
 .card-container {
     display: flex;
     justify-content: center;
     gap: 30px;
     width: 100%;
+    max-width: 1100px;
 }
 
 .card {
     padding: 30px;
     border-radius: 20px;
-    width: 300px;
-}
-
-.card.clay {
-    background-color: var(--swatch--clay);
-    color: white;
-}
-
-.card.oat {
-    background-color: var(--swatch--oat);
-    color: var(--swatch--slate-dark);
-}
-
-.card.kraft {
-    background-color: var(--swatch--kraft);
-    color: var(--swatch--slate-dark);
+    flex: 1;
 }
 
 .card h3 {
-    font-family: var(--heading-font);
-    font-weight: 900;
-    font-size: 24px;
-    color: inherit;
+    font-family: var(--body-font);
+    font-weight: 700;
+    font-size: 22px;
     margin-bottom: 15px;
 }
 
 .card ul {
+    list-style-position: outside;
+    padding-left: 20px;
     font-size: 16px;
-    color: inherit;
+    line-height: 1.6;
 }
+
+/* --- Flowchart Layout --- */
+.flowchart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.flow-box {
+    padding: 20px 30px;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    min-width: 150px;
+    border: 2px solid var(--swatch--slate-dark);
+}
+
+.flow-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flow-arrow {
+    position: absolute;
+    color: var(--swatch--slate-dark);
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* --- Color Utility Classes --- */
+.bg-clay { background-color: var(--swatch--clay); color: white; }
+.bg-kraft { background-color: var(--swatch--kraft); color: var(--swatch--slate-dark); }
+.bg-oat { background-color: var(--swatch--oat); color: var(--swatch--slate-dark); }
+
+.text-clay { color: var(--swatch--clay); }
+.text-slate-dark { color: var(--swatch--slate-dark); }
+
+.border-clay { border-color: var(--swatch--clay); }
+.border-slate-dark { border-color: var(--swatch--slate-dark); }

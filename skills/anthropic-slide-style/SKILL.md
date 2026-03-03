@@ -1,40 +1,37 @@
 ---
 name: anthropic-slide-style
-description: Generates presentation slides in the strict style of Anthropic, featuring a fixed color palette based on their official brand guidelines. Use this skill to create visually consistent, warm, and intellectually-appealing presentations.
+description: Generates presentation slides in the Anthropic style, supporting both decorative hand-drawn illustrations and structured business diagrams. Use this skill for visually consistent, warm, and intellectually-appealing presentations.
 ---
 
-# Anthropic Slide Style Skill (Strict)
+# Anthropic Slide Style Skill
 
-This skill generates presentation slides that strictly replicate the visual identity of Anthropic's presentations. It is designed to enforce visual consistency by using a fixed color palette, typography, and layout based on official brand guidelines.
+This skill generates presentation slides that replicate the visual identity of Anthropic. It supports two primary modes for different use cases:
 
-## Key Features (Fixed)
+1.  **Decorative Slides (`image` mode)**: For title pages, section breaks, or conceptual illustrations. Uses AI image generation to create hand-drawn, sketchy line art.
+2.  **Business Diagrams (`html` mode)**: For main content slides. Uses HTML and CSS to create structured, clean diagrams like 3-column card layouts and process flowcharts. This ensures text is crisp and the layout is precise.
 
-- **Color Palette**: The color palette is strictly enforced based on Anthropic's official CSS variables.
-  - **Background**: `--swatch--ivory-light` (#faf9f5)
-  - **Primary Accent**: `--swatch--clay` (#d97757)
-  - **Text**: `--swatch--slate-dark` (#141413)
-  - **Card/Secondary Backgrounds**: `--swatch--ivory-medium` (#f0eee6), `--swatch--oat` (#e3dacc), `--swatch--kraft` (#d4a27f)
-- **Typography**: Fonts are strictly enforced. Headings MUST use **Playfair Display** (900 weight, black). Body text MUST use **Inter**.
-- **Illustrations**: Illustrations MUST be simple, hand-drawn style line art with only subtle terracotta (`--swatch--clay`) accents. No other colors are permitted.
-- **Layout**: Layouts are clean and spacious. The "ANTHROPIC" logo is always placed in the bottom-left corner.
+## Key Features
+
+- **Color Palette**: Strictly enforced based on Anthropic's official brand guidelines (`--swatch--ivory-light`, `--swatch--clay`, `--swatch--slate-dark`, etc.).
+- **Typography**: Headings use **Playfair Display** (900 weight). Body text uses **Inter**.
+- **Layouts**: Provides CSS classes and templates for common business diagrams.
 
 ## Workflow
 
-1.  **Prepare Slide Content**: Create a Markdown file with your slide content.
-2.  **Generate Illustrations (If Needed)**: Use the `generate` tool with the highly specific prompts from `references/illustration_prompts.md`.
-3.  **Generate Slides**: Use the `slides` tool in `image` mode. This is mandatory to ensure the precise rendering of fonts, colors, and the hand-drawn aesthetic.
+### For Business Diagram Slides (Recommended for Content)
+
+1.  **Choose a Template**: Select a diagram template from the `templates/` directory (e.g., `diagram_3_card.html`).
+2.  **Initialize Project**: Use `slide_initialize` with `generate_mode: 'html'`.
+3.  **Create Slide**: Use `slide_edit` to insert the HTML template and populate it with your content. Customize colors using the provided CSS classes (`.card-clay`, `.card-oat`, `.card-kraft`).
+
+### For Decorative Illustration Slides
+
+1.  **Initialize Project**: Use `slide_initialize` with `generate_mode: 'image'`.
+2.  **Generate Slide**: Use `image_slide_generate` with a prompt from `references/illustration_prompts.md`.
 
 ## Bundled Resources
 
--   **`templates/slide_template.md`**: A boilerplate Markdown file to structure your slide content.
--   **`references/illustration_prompts.md`**: A collection of highly specific prompt examples for generating illustrations that strictly match the Anthropic style.
--   **`references/style.css`**: Contains the core CSS that strictly defines the color variables, font families, and layout rules.
--   **`assets/`**: Contains font files and other static assets.
-
-To create a presentation, start by copying the template:
-
-```bash
-cp /home/ubuntu/skills/anthropic-slide-style/templates/slide_template.md ./my_presentation.md
-```
-
-Then, edit `my_presentation.md` with your content and follow the workflow above. **Do not deviate from the specified styles, colors, or fonts.**
+-   **`references/style.css`**: Contains all CSS rules, including classes for colors (`.bg-clay`, `.bg-oat`, `.bg-kraft`) and diagram components.
+-   **`templates/diagram_3_card.html`**: HTML boilerplate for a 3-column rounded card layout.
+-   **`templates/diagram_flowchart.html`**: HTML boilerplate for a process flowchart.
+-   **`references/illustration_prompts.md`**: Prompts for generating decorative, hand-drawn illustrations.

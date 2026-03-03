@@ -1,0 +1,36 @@
+<!-- Flowchart Template -->
+<div style="position: relative; width: 100%; max-width: 1000px; margin: 0 auto;">
+    <!-- Main container for the diagram -->
+    <div style="border: 2px solid #87867f; border-radius: 20px; padding: 40px; display: flex; justify-content: space-between; align-items: center;">
+
+        <!-- Left Side: Task Input -->
+        <div style="display: flex; flex-direction: column; gap: 20px; text-align: center;">
+            <div style="font-family: 'Inter', sans-serif; font-size: 18px; color: #5e5d59;">Task</div>
+            <div style="border: 2px solid #87867f; border-radius: 16px; padding: 15px 25px; background-color: #faf9f5;">
+                Got an error. Find and fix the issue. Here's the error:
+            </div>
+            <div style="border: 2px solid #87867f; border-radius: 16px; padding: 15px 25px; background-color: #faf9f5;">
+                Cannot read property 'records' of undefined
+            </div>
+        </div>
+
+        <!-- Center: Core Model & Tools -->
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="flow-box bg-clay" style="border: none;">Language Model</div>
+            <div class="flow-box bg-oat" style="border: none;">Set of tools</div>
+        </div>
+
+        <!-- Right Side: Assistant Process -->
+        <div style="display: flex; flex-direction: column; gap: 20px; text-align: center;">
+            <div style="font-family: 'Inter', sans-serif; font-size: 18px; color: #5e5d59;">Assistant</div>
+            <div class="flow-box bg-oat" style="border: none;">Gather context</div>
+            <div class="flow-box bg-kraft" style="border: none;">Formulate a plan</div>
+            <div class="flow-box bg-clay" style="border: none;">Take an action</div>
+        </div>
+    </div>
+
+    <!-- Arrows -->
+    <div style="position: absolute; top: 50%; left: 25%; transform: translate(-50%, -50%); font-size: 40px; color: #5e5d59;">→</div>
+    <div style="position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%); font-size: 40px; color: #5e5d59;">→</div>
+    <div style="position: absolute; top: 35%; right: 5%; font-size: 20px; color: #5e5d59; transform: rotate(90deg);">↻ Iterate</div>
+</div>

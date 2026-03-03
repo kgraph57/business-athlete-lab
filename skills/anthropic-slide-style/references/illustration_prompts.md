@@ -1,21 +1,16 @@
-## Illustration Prompts for Anthropic Style
+## Illustration Prompts for Anthropic Style (Strict)
 
-Use these prompts with the `generate` tool to create illustrations that match the hand-drawn, sketchy aesthetic of the Anthropic slide style.
+Use these prompts with the `generate` tool to create illustrations that strictly adhere to the hand-drawn, sketchy aesthetic of the Anthropic slide style. **No deviation from these color and style rules is permitted.**
 
-### General Style Keywords
+### Mandatory Style Keywords
 
-Always include these keywords in your prompt:
+Every prompt MUST include this exact phrase to ensure consistency:
 
-- `simple line art`
-- `hand-drawn`
-- `sketchy`
-- `minimalist`
-- `monochrome with subtle terracotta accents`
-- `on a cream background`
+`"simple black line art, hand-drawn, sketchy, minimalist, with subtle #C87E6F terracotta accents ONLY, on a solid #FDFDFB cream background"`
 
-### Example Prompts
+### Example Prompts (Strict)
 
-- **For a diagram:** `A simple, hand-drawn, sketchy line art diagram showing the flow of information from a document to a database, with a lock icon and a gear icon. Minimalist, monochrome with subtle terracotta accents on a cream background.`
-- **For a concept:** `A simple, hand-drawn, sketchy line art of a brain with gears inside, representing artificial intelligence. Minimalist, monochrome with subtle terracotta accents on a cream background.`
-- **For a chart:** `A simple, hand-drawn, sketchy line art of a pie chart with one slice separated. Minimalist, monochrome with subtle terracotta accents on a cream background.`
-- **For an object:** `A simple, hand-drawn, sketchy line art of a stack of balanced stones (cairn). Minimalist, monochrome with subtle terracotta accents on a cream background.`
+- **For a diagram:** `A simple black line art diagram, hand-drawn, sketchy, minimalist, showing the flow of information from a document to a database, with a lock icon and a gear icon. Use subtle #C87E6F terracotta accents ONLY, on a solid #FDFDFB cream background.`
+- **For a concept:** `A simple black line art of a brain with gears inside, representing artificial intelligence. Hand-drawn, sketchy, minimalist, with subtle #C87E6F terracotta accents ONLY, on a solid #FDFDFB cream background.`
+- **For a chart:** `A simple black line art of a pie chart with one slice separated. Hand-drawn, sketchy, minimalist, with the separated slice filled with #C87E6F terracotta ONLY, on a solid #FDFDFB cream background.`
+- **For an object:** `A simple black line art of a stack of balanced stones (cairn). Hand-drawn, sketchy, minimalist, with subtle #C87E6F terracotta accents ONLY, on a solid #FDFDFB cream background.`

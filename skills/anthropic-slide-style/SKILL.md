@@ -1,30 +1,30 @@
 ---
 name: anthropic-slide-style
-description: Generates presentation slides in the style of Anthropic, featuring a cream background, terracotta color palette, hand-drawn illustrations, and a distinctive serif font for headings. Use this skill to create warm, intellectually-appealing presentations.
+description: Generates presentation slides in the strict style of Anthropic, featuring a fixed cream background (#FDFDFB), terracotta color palette (#C87E6F), hand-drawn illustrations, and specific fonts (Playfair Display, Inter). Use this skill to create visually consistent, warm, and intellectually-appealing presentations.
 ---
 
-# Anthropic Slide Style Skill
+# Anthropic Slide Style Skill (Strict)
 
-This skill generates presentation slides that replicate the visual identity of Anthropic's presentations. It is ideal for creating slides that are both professional and approachable, with a warm, academic aesthetic.
+This skill generates presentation slides that strictly replicate the visual identity of Anthropic's presentations. It is designed to enforce visual consistency by using a fixed color palette, typography, and layout.
 
-## Key Features
+## Key Features (Fixed)
 
-- **Color Palette**: A warm and inviting palette centered around cream, terracotta, and muted tones.
-- **Typography**: A combination of a bold, elegant serif font for headings and a clean sans-serif for body text.
-- **Illustrations**: Simple, hand-drawn style line art with subtle color accents.
-- **Layout**: Clean, spacious layouts with a consistent placement of the "ANTHROPIC" logo.
+- **Color Palette**: The color palette is non-negotiable. The background is always cream (#FDFDFB), with terracotta (#C87E6F) and warm brown (#A56A57) as fixed accent colors.
+- **Typography**: Fonts are strictly enforced. Headings MUST use **Playfair Display** (900 weight, black). Body text MUST use **Inter**.
+- **Illustrations**: Illustrations MUST be simple, hand-drawn style line art with only subtle terracotta accents. No other colors are permitted.
+- **Layout**: Layouts are clean and spacious. The "ANTHROPIC" logo is always placed in the bottom-left corner.
 
 ## Workflow
 
-1.  **Prepare Slide Content**: Create a Markdown file with your slide content. Follow the structure in `templates/slide_template.md` for headings, lists, and text.
-2.  **Generate Illustrations**: If your slides require diagrams or illustrations, use the `generate` tool with prompts inspired by the examples in `references/illustration_prompts.md`. The key is to ask for "simple, hand-drawn, sketchy line art" with minimal color fills.
-3.  **Generate Slides**: Use the `slides` tool in `image` mode. This skill relies on generating slides as images to perfectly capture the fonts, colors, and hand-drawn feel. The CSS styles required are automatically applied by the skill's bundled resources.
+1.  **Prepare Slide Content**: Create a Markdown file with your slide content. The structure is flexible, but headings and lists are recommended.
+2.  **Generate Illustrations (If Needed)**: Use the `generate` tool with the highly specific prompts from `references/illustration_prompts.md`. These prompts are designed to strictly enforce the visual style.
+3.  **Generate Slides**: Use the `slides` tool in `image` mode. This is mandatory to ensure the precise rendering of fonts, colors, and the hand-drawn aesthetic. The skill automatically applies the strict CSS rules.
 
 ## Bundled Resources
 
--   **`templates/slide_template.md`**: A boilerplate Markdown file to structure your slide content. It demonstrates the recommended use of headings and lists.
--   **`references/illustration_prompts.md`**: A collection of prompt examples for generating illustrations that match the Anthropic style.
--   **`references/style.css`**: (For reference, not direct use) Contains the core CSS that defines the color variables, font families, and layout rules. This is automatically used by the `slides` tool when this skill is active.
+-   **`templates/slide_template.md`**: A boilerplate Markdown file to structure your slide content.
+-   **`references/illustration_prompts.md`**: A collection of highly specific prompt examples for generating illustrations that strictly match the Anthropic style. Adherence to these prompts is critical for visual consistency.
+-   **`references/style.css`**: (For reference) Contains the core CSS that strictly defines the color variables, font families, and layout rules. This is automatically used by the `slides` tool when this skill is active.
 -   **`assets/`**: Contains font files and other static assets.
 
 To create a presentation, start by copying the template:
@@ -33,4 +33,4 @@ To create a presentation, start by copying the template:
 cp /home/ubuntu/skills/anthropic-slide-style/templates/slide_template.md ./my_presentation.md
 ```
 
-Then, edit `my_presentation.md` with your content and follow the workflow above.
+Then, edit `my_presentation.md` with your content and follow the workflow above. **Do not deviate from the specified styles, colors, or fonts.**

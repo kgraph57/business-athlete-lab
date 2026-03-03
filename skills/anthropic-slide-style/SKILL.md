@@ -11,7 +11,7 @@ This skill generates presentation slides that replicate the visual identity of A
 
 - **Color Palette**: Strictly enforced based on Anthropic's official brand guidelines.
 - **Typography**: Headings use **Playfair Display** (900 weight). Body text uses **Inter**.
-- **Layouts**: Provides CSS classes and HTML templates for 7 common slide patterns.
+- **Layouts**: Provides CSS classes and HTML templates for 7 common slide patterns. The logo has been removed to ensure the style is adaptable.
 
 ## Workflow
 

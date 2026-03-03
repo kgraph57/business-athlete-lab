@@ -121,3 +121,94 @@ h1 { font-size: 48px; margin-bottom: 15px; }
 
 .border-clay { border-color: var(--swatch--clay); }
 .border-slate-dark { border-color: var(--swatch--slate-dark); }
+
+/* --- Title Slide Layout --- */
+.title-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 100px;
+}
+.title-text {
+    max-width: 50%;
+}
+.title-text h1 {
+    font-size: 80px;
+    text-align: left;
+    line-height: 1.1;
+}
+.title-illustration {
+    width: 40%;
+    height: auto;
+}
+
+/* --- Table of Contents Layout --- */
+.toc-layout {
+    padding: 80px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.toc-layout h1 { text-align: left; }
+.toc-list {
+    list-style: none;
+    counter-reset: toc-counter;
+    margin-top: 40px;
+}
+.toc-list li {
+    counter-increment: toc-counter;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: var(--swatch--slate-dark);
+}
+.toc-list li::before {
+    content: "0" counter(toc-counter) ".";
+    font-weight: bold;
+    color: var(--swatch--clay);
+    margin-right: 25px;
+    font-size: 24px;
+}
+
+/* --- Section Break Layout --- */
+.section-break-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+.section-break-layout.bg-clay { background-color: var(--swatch--clay); }
+.section-break-layout.bg-slate-dark { background-color: var(--swatch--slate-dark); }
+.section-break-layout h1 {
+    color: white;
+    font-size: 64px;
+}
+
+/* --- Two Column Layout --- */
+.two-column-layout {
+    display: flex;
+    gap: 60px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px 0;
+}
+.column {
+    flex: 1;
+}
+.column h3 {
+    font-family: var(--heading-font);
+    font-size: 28px;
+    color: var(--swatch--slate-dark);
+    margin-bottom: 15px;
+}
+.column p, .column ul {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* --- Chart Layout --- */
+.chart-container {
+    width: 100%;
+    max-width: 900px;
+    height: 450px; /* Fixed height for chart */
+}

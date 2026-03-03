@@ -1,0 +1,27 @@
+<!-- Data Chart Template -->
+<div class="chart-container">
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+    const ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['A', 'B', 'C', 'D'],
+            datasets: [{
+                label: 'Sample Data',
+                data: [12, 19, 3, 5],
+                backgroundColor: [
+                    '#d97757', // Clay
+                    '#e3dacc', // Oat
+                    '#d4a27f', // Kraft
+                    '#3d3d3a'  // Slate Medium
+                ]
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+</script>

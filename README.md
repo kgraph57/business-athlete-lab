@@ -73,3 +73,4 @@ scripts/
 `main` ブランチへの push で GitHub Actions が自動ビルド・デプロイします。
 
 公開 URL: https://kgraph57.github.io/business-athlete-lab
+
